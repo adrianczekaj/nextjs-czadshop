@@ -3,7 +3,7 @@ import './globals.css'
 
 
 export const metadata: Metadata = {
-  title: 'Create Next App',
+  title: 'Czadshop-Next Dev',
   description: 'An e-commerce site built with Next.js and TypeScript',
 }
 
