@@ -22,13 +22,15 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    getCurrentUser();
-  }, []);
+    if (isPrivatePage) {
+      getCurrentUser();
+    }
+  }, [pathname]);
 
   const onLogout = async () => {
     try {
       await axios.get("/api/auth/logout");
-      message.success("Logout succesfully");
+      message.success("Logout successfully");
       setCurrentUser(null);
       router.push("/auth/login");
     } catch (e: any) {
