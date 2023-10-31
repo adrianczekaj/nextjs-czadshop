@@ -1,8 +1,10 @@
 "use client";
-import React from "react";
-import { Button, Form } from "antd";
+import React, { useState } from "react";
+import { App, Button, Form } from "antd";
 import Link from "next/link";
 import { getAntdFieldRequiredRule } from "@/helpers/validation";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface userType {
   name: string;
@@ -11,8 +13,20 @@ interface userType {
 }
 
 function Register() {
-  const onRegister = (values: userType) => {
-    console.log(values);
+  const [loading, setLoading] = useState(false);
+  const { message } = App.useApp();
+  const router = useRouter();
+  const onRegister = async (values: userType) => {
+    try {
+      setLoading(true);
+      await axios.post("/api/auth/register", values);
+      message.success("Registration successful, please login to continue!");
+      router.push("/auth/login");
+    } catch (e: any) {
+      message.error(e.response.data.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,7 +68,7 @@ function Register() {
           >
             <input type="password" />
           </Form.Item>
-          <Button type="primary" htmlType="submit" block>
+          <Button type="primary" htmlType="submit" block loading={loading}>
             Register
           </Button>
 
