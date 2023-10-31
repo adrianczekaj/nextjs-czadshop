@@ -1,13 +1,17 @@
-import React from 'react';
-import{ConfigProvider} from "antd";
+import React from "react";
+import { App, ConfigProvider } from "antd";
 
-function ThemeProvider({children}:{children:React.ReactNode}) {
+function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <ConfigProvider theme={{token: {
-        colorPrimary: '#000'
-        } }}>
-        {children}
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#000",
+          },
+        }}
+      >
+        <App>{children}</App>
       </ConfigProvider>
     </div>
   );
