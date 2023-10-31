@@ -3,8 +3,10 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { App, Popover } from "antd";
+import Loader from "@/app/components/Loader";
 
 function LayoutProvider({ children }: { children: React.ReactNode }) {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { message } = App.useApp();
   const [currentUser, setCurrentUser] = useState<any>(null);
@@ -14,10 +16,13 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
 
   const getCurrentUser = async () => {
     try {
+      setLoading(true);
       const response = await axios.get("/api/auth/currentuser");
       setCurrentUser(response.data.data);
     } catch (e: any) {
       message.error(e.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -29,12 +34,15 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
 
   const onLogout = async () => {
     try {
+      setLoading(true);
       await axios.get("/api/auth/logout");
       message.success("Logout successfully");
       setCurrentUser(null);
       router.push("/auth/login");
     } catch (e: any) {
       message.error(e.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,6 +67,7 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <div>
+      {loading && <Loader />}
       {isPrivatePage && currentUser && (
         <>
           <div className="bg-primary py-2 px-5 flex justify-between items-center">
