@@ -30,3 +30,13 @@ input {
 .ant-form-item-label {
   padding-bottom: 0!important;
 }
+
+textarea {
+  width: 100%!important;
+  min-height: 100px!important;
+  padding: 10px !important
+}
+
+table {
+  border: 1px solid #1a1a1a!important
+}
