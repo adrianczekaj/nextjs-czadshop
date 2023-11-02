@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ThemeProvider from "@/providers/ThemeProvider";
 import LayoutProvider from "@/providers/LayoutProvider";
+import StoreProvider from "@/providers/StoreProvider";
 
 export const metadata: Metadata = {
   title: "Czadshop-Next Dev",
@@ -17,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>
-          <LayoutProvider>{children}</LayoutProvider>
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider>
+            <LayoutProvider>{children}</LayoutProvider>
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );
