@@ -2,13 +2,14 @@
 import React from "react";
 import { Tabs, TabsProps } from "antd";
 import { useSelector } from "react-redux";
+import CategoriesList from "@/app/profile/components/CategoriesList";
 
 function Profile() {
   const { currentUser } = useSelector((state: any) => state.user);
 
   const adminTabs: TabsProps["items"] = [
     { key: "1", label: "Products", children: "Products" },
-    { key: "2", label: "Categories", children: "Categories" },
+    { key: "2", label: "Categories", children: <CategoriesList /> },
     { key: "3", label: "Orders", children: "Orders" },
     { key: "4", label: "Users", children: "Users" },
   ];
