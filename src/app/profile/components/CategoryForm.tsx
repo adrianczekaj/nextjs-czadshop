@@ -58,11 +58,7 @@ function CategoryForm({
         >
           <input type="text" />
         </Form.Item>
-        <Form.Item
-          label="Category description"
-          name="description"
-          rules={getAntdFieldRequiredRule("Category description is required")}
-        >
+        <Form.Item label="Category description" name="description">
           <textarea />
         </Form.Item>
       </Form>
